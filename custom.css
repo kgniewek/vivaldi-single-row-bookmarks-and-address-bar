@@ -1,0 +1,68 @@
+/* ==========================================================================
+   VIVALDI SINGLE-BAR BOOKMARKS
+   Moves the bookmark bar into the top-left of the address bar row,
+   shows bookmarks as icon-only buttons, and leaves the rest of the row
+   for the address/search field and window controls.
+
+   Tweak the values in :root below to fit your screen.
+   ========================================================================== */
+
+:root {
+  /* Bookmark strip */
+  --bm-bar-width: 450px;      /* width of the strip; bookmarks that don't fit go into the » overflow menu */
+  --bm-bar-left: 72px;        /* distance from the left edge (clear of the menu + panel buttons) */
+  --bm-bar-top: 1px;          /* distance from the top edge */
+  --bm-bar-height: 20px;
+
+  /* Bookmark buttons */
+  --bm-btn-size: 26px;        /* width and height of each icon button */
+  --bm-btn-margin-top: 3px;
+  --bm-btn-hover: #333;       /* background that appears on hover */
+}
+
+/* Narrow windows: collapse the strip so only the » overflow button remains */
+@media (max-width: 700px) {
+  :root { --bm-bar-width: 22px; }
+}
+
+/* Bookmark bar: pulled out of its own row and pinned into the address bar row */
+#browser.bookmark-bar-top > #main > .bookmark-bar {
+  width: var(--bm-bar-width);
+  position: fixed;
+  top: var(--bm-bar-top);
+  left: var(--bm-bar-left);
+  height: var(--bm-bar-height);
+  z-index: 1000;
+  background: transparent !important;
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0px;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Bookmark buttons: small, icon-only */
+#browser.bookmark-bar-top > #main > .bookmark-bar button {
+  position: relative;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-top: 5px;
+  padding-bottom: 3px;
+  height: var(--bm-btn-size);
+  width: var(--bm-btn-size);
+  margin-top: var(--bm-btn-margin-top);
+  border-radius: 4px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  transform: translateY(0px);
+  display: block;
+}
+
+/* Background only shows on hover, so the bar stays seamless */
+#browser.bookmark-bar-top > #main > .bookmark-bar button:hover {
+  background-color: var(--bm-btn-hover);
+}
