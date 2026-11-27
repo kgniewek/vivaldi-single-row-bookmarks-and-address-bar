@@ -27,8 +27,14 @@ A small custom CSS mod for the [Vivaldi browser](https://vivaldi.com) that moves
    Open `vivaldi://experiments` and enable **Allow for using CSS modifications** if it's listed (it may not be in newer versions), then restart Vivaldi.
 4. **Point Vivaldi at the folder.**
    `Settings → Appearance → Custom UI Modifications` and choose the folder containing `custom.css`.
-5. **Restart Vivaldi.** Your bookmarks should now sit in the top-left of the address bar row.
+5. **Add blank space to the left of the address bar.** The bookmark strip is drawn *on top of* the address bar row, so without free room it will cover the buttons and address field. Make space for it by adding a spacer:
+   - Right-click an empty area of the address bar row and choose **Customize Address Bar** (or go to `Settings → Address Bar`).
+   - Drag a **Spacer** (blank space) item to the **left** of the address field, after the existing buttons (back, forward, reload, etc.).
+   - Add more than one spacer, or resize the window, until the gap is roughly as wide as `--bm-bar-width` (450px by default). The bookmarks will then sit in that empty area instead of covering anything.
+6. **Restart Vivaldi.** Your bookmarks should now sit in the top-left of the address bar row, inside the blank space you added.
 
+> **Important:** The blank space in step 5 is required. The CSS only positions the bookmarks; it doesn't push the address bar out of the way.
+>
 > **Tip:** Vivaldi only loads modifications at startup, so restart the browser (or use `vivaldi://restart`) after every edit to `custom.css`.
 
 ## Customization
@@ -55,6 +61,9 @@ Check that the Custom UI Modifications folder is set, that the file is named exa
 
 **Bookmarks aren't in the address bar row.**
 The bookmark bar needs to be enabled with position **Top**. The CSS targets `#browser.bookmark-bar-top`, so it does nothing if the bar is at the bottom or hidden.
+
+**Bookmarks cover the address field or other buttons.**
+You probably haven't added enough blank space to the left of the address bar (see Installation, step 5). Add more spacers so the empty area is at least as wide as `--bm-bar-width`.
 
 **Bookmarks overlap the menu or panel buttons.**
 Increase `--bm-bar-left`.
